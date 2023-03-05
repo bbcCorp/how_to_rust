@@ -45,6 +45,7 @@ Hello, world!
 | 2 | [Variables and DataTypes](./code/variables/src/main.rs) | Exploring datatypes in rust |
 | 3 | [Custom libraries](./code/demo_package/src/main.rs) | How to create and use libraries in rust |
 | 4 | [Control flow](./code/control_flow/src/main.rs) | Exploring control flows in rust |
+| 5 | [Strings](./code/demo_strings/src/main.rs) | Exploring Strings in rust |
 
 ------------
 
