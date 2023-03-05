@@ -34,3 +34,17 @@ Hello, world!
 
 
 ```
+
+-----------
+
+## List of exercises
+
+| Sequence | Topic  | Description |
+| ---------| -----  | ----------- |
+| 1 | [HelloWorld!](./code/helloworld/src/main.rs) | Getting started with rust |
+| 2 | [Variables and DataTypes](./code/variables/src/main.rs) | Exploring datatypes in rust |
+| 3 | [Custom libraries](./code/demo_package/src/main.rs) | How to create and use libraries in rust |
+| 4 | [Control flow](./code/control_flow/src/main.rs) | Exploring control flows in rust |
+
+------------
+
