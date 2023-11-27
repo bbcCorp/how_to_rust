@@ -60,7 +60,11 @@ $ cargo run
 
 We have lots of things to cover so here is a step-wise exploration of the key topics.
 
+### Topics:
+- [Datatypes](./Datatypes.md)
+- [Macros](./Macro.md)
 
+### Code:
 
 | Sequence | Topic  | Description |
 | ---------| -----  | ----------- |
