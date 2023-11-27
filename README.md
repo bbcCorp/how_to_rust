@@ -69,7 +69,7 @@ We have lots of things to cover so here is a step-wise exploration of the key to
 | 3 | [Custom libraries](./code/demo_package/src/main.rs) | How to create and use libraries|
 | 4 | [Control flow](./code/control_flow/src/main.rs) | Exploring control flows|
 | 5 | [Strings](./code/demo_strings/src/main.rs) | Exploring Strings, Ownerships, References and multable references |
-
+| 6 | [Stack and Heap](./code/stack_and_heap/src/main.rs) | Exploring Stack and Heap |
 ------------
 
 ## References
