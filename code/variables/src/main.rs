@@ -1,6 +1,8 @@
 fn main() {
     demo_scalar();
 
+    demo_mutable();
+
     demo_tuple();
 
     demo_array();
@@ -13,6 +15,7 @@ fn main() {
 fn demo_scalar() {
     println!("\n\n Demo scalar");
 
+    // note: all variables in rust are immutable by default    
     let i = 16;
     println!("i = {}", i);
 
@@ -108,4 +111,15 @@ fn exercise3() {
 
     let coords_array: [f32; 2] = [coords.0, coords.1];
     print_array(coords_array);
+}
+
+fn demo_mutable() {
+    println!("\n\n Demo mutable");
+
+    // we tell the compiler that we want to mutate the value stored in variable x
+    let mut x  = 5;
+    println!("x = {}", x);
+
+    x = 10;
+    println!("x = {}", x);
 }

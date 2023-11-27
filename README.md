@@ -41,9 +41,9 @@ $ rustc main.rs
 
 ### Hello Cargo
 
-Now, let's use Cargo generates a boilerplate project for us.
+What is Cargo? Cargo is Rust’s build system and package manager. Most Rustaceans use it to manage their Rust projects because Cargo handles a lot of tasks for you, such as building your code, downloading the libraries your code depends on, and building those libraries.
 
-It consists of a new directory named hello-cargo with a src subdirectory and adds two files: Cargo.toml and main.rs.
+Now, let's use Cargo to generates a boilerplate project for us. The command is `cargo new <program_name>`.
 
 ```bash
 # 
@@ -55,6 +55,8 @@ $ cd hello-cargo
 $ cargo run
 ```
 
+It consists of a new directory named hello-cargo with a src subdirectory and adds two files: Cargo.toml and main.rs.
+
 --------------------
 ## List of exercises
 
@@ -64,6 +66,7 @@ We have lots of things to cover so here is a step-wise exploration of the key to
 - [Datatypes](./Datatypes.md)
 - [Macros](./Macro.md)
 - [Memory](./Memory.md)
+- [Ownership](./Ownership.md)
 
 ### Code:
 
