@@ -15,7 +15,10 @@ fn main() {
 fn demo_scalar() {
     println!("\n\n Demo scalar");
 
-    // note: all variables in rust are immutable by default    
+    let my_string: String = String::from("Hello World");
+    println!("{}", my_string);
+
+    // note: all variables in rust are immutable by default
     let i = 16;
     println!("i = {}", i);
 
@@ -117,7 +120,7 @@ fn demo_mutable() {
     println!("\n\n Demo mutable");
 
     // we tell the compiler that we want to mutate the value stored in variable x
-    let mut x  = 5;
+    let mut x = 5;
     println!("x = {}", x);
 
     x = 10;

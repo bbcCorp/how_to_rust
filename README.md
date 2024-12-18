@@ -14,10 +14,10 @@ First, let us validate the setup. We should have the rustc and cargo commands av
 
 ```bash
 $ rustc --version
-rustc 1.67.1 (d5a82bbd2 2023-02-07)
+rustc 1.83.0 (90b35a623 2024-11-26)
 
 $ cargo --version
-cargo 1.67.1 (8ecd4f20a 2023-01-10)
+cargo 1.83.0
 ```
 
 Rust has a six-week, rapid release process. To update the rust installation, use the `rustup update` utility.
@@ -79,6 +79,8 @@ We have lots of things to cover so here is a step-wise exploration of the key to
 | 5 | [Strings](./code/demo_strings/src/main.rs) | Exploring Strings, Ownerships, References and multable references |
 | 6 | [Stack and Heap](./code/stack_and_heap/src/main.rs) | Exploring Stack and Heap |
 ------------
+
+You can find answers to common questions [here](./CommonQuestions.md)
 
 ## References
 

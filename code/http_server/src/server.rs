@@ -1,6 +1,8 @@
 // Every file is it's own module
 // Everything inside a module is private by default
 
+use std::net::{TcpListener, TcpStream};
+
 // define a struct for the server
 pub struct Server {
     // struct definition
@@ -22,7 +24,21 @@ impl Server {
             "Server running at addr:{} and port:{}",
             self.addr, self.port
         );
+
+        let server_addr = format!("{}:{}", self.addr, self.port);
+
+        // we use unwrap to get the value from the Result<T> enum
+        // In case of an Err, we Panic and terminate the program
+        let listener = TcpListener::bind(server_addr).unwrap();
+
+        println!("Press Ctrl-C to exit...");
+        // start an infinite loop
+        loop {
+            listener.accept();
+        }
     }
 
-    // functions - These are like static functions, they do not need an instance of the struct
+    fn handle_client(&self, stream: TcpStream) {
+        // ...
+    } // functions - These are like static functions, they do not need an instance of the struct
 }
