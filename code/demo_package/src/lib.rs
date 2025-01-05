@@ -104,3 +104,22 @@ pub fn exercise3() {
     let coords_array: [f32; 2] = [coords.0, coords.1];
     print_array(coords_array);
 }
+
+struct Person {
+    name: String,
+    age: u8,
+    email: String,
+}
+
+pub fn demo_struct() {
+    let p1 = Person {
+        name: String::from("BBC"),
+        age: 25,
+        email: String::from("bbc@gmail.com"),
+    };
+
+    println!("\n\n Demo struct");
+    println!("Name: {}", p1.name);
+    println!("Age: {}", p1.age);
+    println!("Email: {}", p1.email);
+}
