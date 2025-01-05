@@ -1,3 +1,6 @@
+#![crate_name = "demo_package"]
+
+/// A simple function to demonstrate operations on scalar types
 pub fn demo_scalar() {
     println!("\n\n Demo scalar");
 
@@ -15,10 +18,11 @@ pub fn demo_scalar() {
     println!("area = {}", get_area(radius));
 }
 
+/// A simple function to demonstrate operations on tuple
 pub fn demo_tuple() {
     println!("\n\n Demo tuple");
 
-    let tup = (1, 2, 3, 4, 5);
+    let tup = (1, 2, 3.5, 'a', "Hello");
     println!("tup = {:?}", tup);
     // println!("Length of tup = {}", tup.len());
     println!("tup.0 = {}", tup.0);
@@ -37,6 +41,7 @@ pub fn demo_tuple() {
     println!("pi = {}", pi);
 }
 
+/// A simple function to demonstrate operations on array
 pub fn demo_array() {
     // Demo of array
     println!("\n\n Demo array");
@@ -51,6 +56,7 @@ pub fn demo_array() {
     println!("buf2 = {:?}", buf2);
 }
 
+/// A simple function to demonstrate operations on vectors
 pub fn demo_vectors() {
     // beyond a size of 32 use a vector
     println!("\n\n Demo vector");
@@ -70,6 +76,7 @@ pub fn demo_vectors() {
     }
 }
 
+/// A function to calculate area of a circle
 pub fn get_area(radius: f64) -> f64 {
     // floating point
     const PI: f64 = 3.14159;

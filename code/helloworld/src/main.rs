@@ -2,17 +2,21 @@ use std::io::stdin;
 
 fn main() {
     // define an immutable string
-    let msg = "Hello, world";
+    let msg: String = "Hello, world";
 
-    // create a mutable string
-    let mut name: String = String::new();
     println!("Enter your name: ");
 
+    // create a mutable string to handle input
+    let mut input: String = String::new();
+
     // read the input
-    stdin().read_line(&mut name).unwrap();
+    // Note: read_line() reads a line of input from the standard input and stores it in a String.
+    // It returns a Result value, which indicates whether the operation was successful or not.
+
+    stdin().read_line(&mut input).unwrap();
 
     // trim whitespaces from the entered name
-    name = name.trim().to_string();
+    let name: String = input.trim().parse().unwrap();
 
     println!("{} {}!", msg, name);
 }
