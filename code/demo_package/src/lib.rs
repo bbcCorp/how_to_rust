@@ -2,8 +2,13 @@
 
 /// A simple function to demonstrate operations on scalar types
 pub fn demo_scalar() {
-    println!("\n\n Demo scalar");
+    println!("\n\n Demo scalar \n");
 
+    let flag: bool = true;
+    println!("flag = {}", flag);
+    assert_eq!(flag, true);
+
+    println!("\n\n Demo int operations");
     let i = 16;
     println!("i = {}", i);
 
@@ -13,32 +18,48 @@ pub fn demo_scalar() {
     let sum = i + j;
     println!("sum = {}", sum);
 
+    // floating point operations
+    println!("\n\n Demo floating point operations");
+    let pi: f32 = 3.14159;
+    println!(
+        "pi = {}, floor={} ceil={} round={}",
+        pi,
+        pi.floor(),
+        pi.ceil(),
+        pi.round()
+    );
+
     // calculate area of circle
     let radius = 5.0;
     println!("area = {}", get_area(radius));
+
+    // char operations
+    println!("\n\n Demo char operations");
+    let ch = 'a';
+    println!("ch = {}", ch);
+    println!("ch as i32 = {}", ch as i32);
+    println!("is uppercase? {}", ch.is_uppercase());
+    println!("is lowercase? {}", ch.is_lowercase());
+    println!("to string: {}", ch.to_string());
 }
 
 /// A simple function to demonstrate operations on tuple
 pub fn demo_tuple() {
     println!("\n\n Demo tuple");
 
-    let tup = (1, 2, 3.5, 'a', "Hello");
+    let tup = (1, 2, 3.14159, 'a', "Hello");
     println!("tup = {:?}", tup);
     // println!("Length of tup = {}", tup.len());
     println!("tup.0 = {}", tup.0);
     println!("tup.1 = {}", tup.1);
 
-    let (x, y, z, a, b) = tup;
+    println!("\n\n Demo tuple destructuring");
+    let (x, y, pi, a, b) = tup;
     println!("x = {}", x);
     println!("y = {}", y);
-    println!("z = {}", z);
+    println!("pi = {}", pi);
     println!("a = {}", a);
     println!("b = {}", b);
-
-    // mixed type typle
-    let tup2 = (1, 3.14159, "Hello world");
-    let pi = tup2.1;
-    println!("pi = {}", pi);
 }
 
 /// A simple function to demonstrate operations on array
@@ -54,6 +75,10 @@ pub fn demo_array() {
     // array with type def
     let buf2: [u8; 3] = [1, 2, 3];
     println!("buf2 = {:?}", buf2);
+
+    // array with default value
+    let buf3: [u8; 3] = [0; 3];
+    println!("buf3 = {:?}", buf3);
 }
 
 /// A simple function to demonstrate operations on vectors
@@ -105,21 +130,33 @@ pub fn exercise3() {
     print_array(coords_array);
 }
 
+// Define a custom data type
+// the derive debug macro is used to print the struct
+#[derive(Debug)]
 struct Person {
+    id: u32,
     name: String,
     age: u8,
     email: String,
 }
 
 pub fn demo_struct() {
+    // create an immutable struct object
     let p1 = Person {
+        id: 1,
         name: String::from("BBC"),
         age: 25,
         email: String::from("bbc@gmail.com"),
     };
 
     println!("\n\n Demo struct");
+    println!("p1 = {:#?}", p1);
     println!("Name: {}", p1.name);
     println!("Age: {}", p1.age);
     println!("Email: {}", p1.email);
+
+    // create a mutable struct object
+    // combine data from a base struct
+    let mut p2 = Person { id: 2, ..p1 };
+    println!("p2 = {:#?}", p2);
 }
