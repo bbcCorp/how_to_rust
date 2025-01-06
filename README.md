@@ -81,12 +81,13 @@ We have lots of things to cover so here is a step-wise exploration of the key to
 | ---------| -----  | ----------- |
 | 1 | [HelloWorld!](./code/helloworld/src/main.rs) | Getting started with Rust |
 | 2 | [Variables and DataTypes](./code/variables/src/main.rs) | Exploring datatypes|
-| 3 | [Custom libraries](./code/demo_package/src/main.rs) | How to create and use libraries|
+| 3 | [Structs and Traits](./code/structs_and_traits/src/main.rs) | Exploring Structs and Traits |
 | 4 | [Control flow](./code/control_flow/src/main.rs) | Exploring control flows|
-| 5 | [Strings](./code/demo_strings/src/main.rs) | Exploring Strings, Ownerships, References and multable references |
-| 6 | [Stack and Heap](./code/stack_and_heap/src/main.rs) | Exploring Stack and Heap |
-| 7 | [References and Slices](./code/references_and_slices/src/main.rs) | Exploring Rust References and slices |
-| 8 | [Structs and Traits](./code/structs_and_traits/src/main.rs) | Exploring Structs and Traits |
+| 5 | [Functions and Closures](./code/demo_closures_and_functions/src/main.rs) | Exploring functions and closures|
+| 6 | [Custom libraries](./code/demo_package/src/main.rs) | How to create and use libraries|
+| 7 | [Strings](./code/demo_strings/src/main.rs) | Exploring Strings, Ownerships, References and multable references |
+| 8 | [Stack and Heap](./code/stack_and_heap/src/main.rs) | Exploring Stack and Heap |
+| 9 | [References and Slices](./code/references_and_slices/src/main.rs) | Exploring Rust References and slices |
 ------------
 
 You can find answers to common questions [here](./CommonQuestions.md)
