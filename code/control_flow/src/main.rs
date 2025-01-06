@@ -9,6 +9,8 @@ fn main() {
     demo_alternate_do_while_loop();
 
     demo_for_loop();
+
+    demo_pattern_matching();
 }
 
 fn demo_if_else() {
@@ -125,4 +127,30 @@ fn demo_for_loop() {
         *num += 10
     }
     println!("my_vec after looping: {:?}", my_vec);
+}
+
+// ---------- //
+enum MessageState {
+    Pending,
+    Sending,
+    Received,
+}
+
+fn check_msg_state(msg_state: &MessageState) {
+    match msg_state {
+        MessageState::Pending => println!("Msg is Pending"),
+
+        // catch all condition
+        _ => println!("Msg is no longer pending"),
+    }
+}
+
+fn demo_pattern_matching() {
+    println!("\n\nPattern Matching demo");
+
+    let mut msg = MessageState::Pending;
+    check_msg_state(&msg);
+
+    msg = MessageState::Received;
+    check_msg_state(&msg);
 }
