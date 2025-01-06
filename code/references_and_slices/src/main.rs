@@ -13,6 +13,12 @@ fn main() {
         create_greeting(&mut s1);
         println!("updated string: {}", s1);
 
+        // Array reversal
+        let mut arr: [i32; 5] = [1, 2, 3, 4, 5];
+        println!("\n\nArray: {:?}, len={}", arr, arr.len());
+        inplace_reverse(&mut arr);
+        println!("Reversed Array: {:?}, len={} \n\n", arr, arr.len());
+
         // Slice example
         // Slice is a reference to a contigious sequence of elements in a collection
         let hello = &s1[0..5];
@@ -39,6 +45,15 @@ fn main() {
         s2[0] = 10;
         println!("Slice 2: {:?}, len={}", s2, s2.len());
         println!("Array: {:?}, len={}", arr, arr.len());
+    }
+}
+
+/// Function to do an inplace reversal of array
+fn inplace_reverse(arr: &mut [i32]) {
+    for i in 0..arr.len() / 2 {
+        let temp = arr[i];
+        arr[i] = arr[arr.len() - 1 - i];
+        arr[arr.len() - 1 - i] = temp;
     }
 }
 

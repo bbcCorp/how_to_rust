@@ -79,6 +79,7 @@ We have lots of things to cover so here is a step-wise exploration of the key to
 | 5 | [Strings](./code/demo_strings/src/main.rs) | Exploring Strings, Ownerships, References and multable references |
 | 6 | [Stack and Heap](./code/stack_and_heap/src/main.rs) | Exploring Stack and Heap |
 | 7 | [References and Slices](./code/references_and_slices/src/main.rs) | Exploring Rust References and slices |
+| 8 | [Structs and Traits](./code/structs_and_traits/src/main.rs) | Exploring Structs and Traits |
 ------------
 
 You can find answers to common questions [here](./CommonQuestions.md)
@@ -87,3 +88,4 @@ You can find answers to common questions [here](./CommonQuestions.md)
 
 * [Ultimate-Rust-Crash-Course by Nathan Stocks](https://www.udemy.com/course/ultimate-rust-crash-course/)
 * [Rust 2021 Fundamentals | Pluralsight](https://www.pluralsight.com/courses/rust-2021-fundamentals)
+* [A Gentle Introduction To Rust | Bt Steve Donovan](https://stevedonovan.github.io/rust-gentle-intro/readme.html)

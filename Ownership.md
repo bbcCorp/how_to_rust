@@ -22,6 +22,11 @@ fn main() {
     let s2 = s1;
     // s2 is a copy of s1. But s1 is not valid anymore.
     // ownership of "hello" has now moved from s1 to s2.
+    
+    // Unlike Java/Python where s2 becomes yet another reference to the string object referenced by s1, 
+    // in Rust string referencing/copy does not happen automatically. 
+    // Copying involves memory allocation and copying the characters. 
+    // So we either do explicitly cloning or pass a reference which is the preferred option in most cases
 
 
     // allocate a new string to store the input
