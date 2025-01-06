@@ -1,6 +1,10 @@
 fn main() {
     demo_if_else();
+
     demo_unconditional_loop();
+
+    demo_labelled_loop();
+
     demo_while_loop();
     demo_alternate_do_while_loop();
 
@@ -13,12 +17,15 @@ fn demo_if_else() {
     let number = 3;
     let mut msg = "";
 
-    if number < 5 {
+    if number == 5 {
+        println!("Condition matched");
+    } else if number < 5 {
         msg = "condition was true";
         println!("condition was true");
     } else {
         println!("condition was false");
     }
+
     println!("Control flow msg: {}", msg);
 
     // alternate syntax
@@ -76,6 +83,21 @@ fn demo_alternate_do_while_loop() {
     }
 }
 
+fn demo_labelled_loop() {
+    println!("\n\nDemo of labelled nested loop");
+
+    // Nested loops with loop labels
+    'one: loop {
+        'two: loop {
+            println!("Breaking out of loop 2");
+            break 'two;
+        }
+
+        println!("In loop 1");
+        break 'one;
+    }
+}
+
 fn demo_for_loop() {
     println!("\n\n For loop demo");
 
@@ -95,4 +117,12 @@ fn demo_for_loop() {
     for i in 0..10 {
         println!("i: {}", i);
     }
+
+    // iterate and update a vector collection
+    let mut my_vec = vec![1, 2, 3, 4, 5];
+    println!("my_vec before looping: {:?}", my_vec);
+    for num in &mut my_vec {
+        *num += 10
+    }
+    println!("my_vec after looping: {:?}", my_vec);
 }

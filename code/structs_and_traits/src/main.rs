@@ -32,7 +32,7 @@ fn main() {
 
     println!("{}", p.describe());
 
+    // Now lets update a property in the person object
     p.update_email("bbc@email.com");
-
     println!("{}", p.describe());
 }

@@ -1,7 +1,10 @@
-# how_to_rust-
-How to Rust?
+# How to Rust?
 
-Follow [this document](https://www.rust-lang.org/learn/get-started) to get started with rust. 
+Now, that is an interesting question about an interesting programming language.
+
+We will explore the key concepts of this language through a series of examples. Once we have covered the basics, we will implement some common algorithms using Rust.
+
+If you are new to Rust, you can follow the trainings and books mentioned in the reference section.
 
 
 ## Getting Started
@@ -62,11 +65,15 @@ It consists of a new directory named hello-cargo with a src subdirectory and add
 
 We have lots of things to cover so here is a step-wise exploration of the key topics.
 
+---
+
 ### Topics:
 - [Datatypes](./Datatypes.md)
 - [Macros](./Macro.md)
 - [Memory](./Memory.md)
 - [Ownership](./Ownership.md)
+
+---
 
 ### Code:
 
@@ -84,8 +91,12 @@ We have lots of things to cover so here is a step-wise exploration of the key to
 
 You can find answers to common questions [here](./CommonQuestions.md)
 
-## References
+---
 
+## References
+* [Official | Getting started guide](https://www.rust-lang.org/learn/get-started) 
 * [Ultimate-Rust-Crash-Course by Nathan Stocks](https://www.udemy.com/course/ultimate-rust-crash-course/)
-* [Rust 2021 Fundamentals | Pluralsight](https://www.pluralsight.com/courses/rust-2021-fundamentals)
+* [Rust 2021 Fundamentals by Zachary Bennett | Pluralsight](https://www.pluralsight.com/courses/rust-2021-fundamentals)
 * [A Gentle Introduction To Rust | Bt Steve Donovan](https://stevedonovan.github.io/rust-gentle-intro/readme.html)
+
+---
