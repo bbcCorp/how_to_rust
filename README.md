@@ -9,7 +9,25 @@ If you are new to Rust, you can follow the trainings and books mentioned in the 
 
 ## Getting Started
 
-Let's step into the world of Rust. 
+Let's step into the world of Rust.
+
+## Installation
+
+```bash
+# On Mac, use homebrew
+brew install rustup
+
+# On Linux
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# Once rustup is installed, use this command
+rustup-init
+```
+
+`rustup-init`, which will install Rust and the Rust Toolchain, which includes the following:
+- rustc - the Rust compiler
+- cargo - the Rust package manager
+- rustup - the Rust toolchain manager
 
 ### Validate Setup
 
@@ -89,6 +107,7 @@ We have lots of things to cover so here is a step-wise exploration of the key to
 | 8 | [Strings](./code/demo_strings/src/main.rs) | Exploring Strings, Ownerships, References and multable references |
 | 8 | [Stack and Heap](./code/stack_and_heap/src/main.rs) | Exploring Stack and Heap |
 | 10 | [References and Slices](./code/references_and_slices/src/main.rs) | Exploring Rust References and slices |
+| 11 | [Generics](./code/demo_generics/src/main.rs) | Exploring Generics in Rust |
 ------------
 
 You can find answers to common questions [here](./CommonQuestions.md)

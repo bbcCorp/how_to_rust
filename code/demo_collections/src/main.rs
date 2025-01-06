@@ -69,7 +69,7 @@ fn demo_hash_map() {
     let coffee_iter = coffee_map.iter();
     println!("HashMap iterator: {:?}\n", coffee_iter);
 
-    // using map with iterator
+    // using iterator adapters - some consume some don't
     let total: f64 = coffee_iter.map(|(_coffee, value)| value).sum();
     println!("Total cost of all coffees:{}", total);
 
