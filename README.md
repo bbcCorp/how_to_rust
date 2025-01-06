@@ -78,6 +78,7 @@ We have lots of things to cover so here is a step-wise exploration of the key to
 | 4 | [Control flow](./code/control_flow/src/main.rs) | Exploring control flows|
 | 5 | [Strings](./code/demo_strings/src/main.rs) | Exploring Strings, Ownerships, References and multable references |
 | 6 | [Stack and Heap](./code/stack_and_heap/src/main.rs) | Exploring Stack and Heap |
+| 7 | [References and Slices](./code/references_and_slices/src/main.rs) | Exploring Rust References and slices |
 ------------
 
 You can find answers to common questions [here](./CommonQuestions.md)
@@ -85,3 +86,4 @@ You can find answers to common questions [here](./CommonQuestions.md)
 ## References
 
 * [Ultimate-Rust-Crash-Course by Nathan Stocks](https://www.udemy.com/course/ultimate-rust-crash-course/)
+* [Rust 2021 Fundamentals | Pluralsight](https://www.pluralsight.com/courses/rust-2021-fundamentals)

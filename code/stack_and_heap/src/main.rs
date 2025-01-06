@@ -3,11 +3,11 @@ fn main() {
     // On stack
     {
         let a = 1;
-        let _b = a;
+        let b = a;
 
         // a and _b can both be used since these are simple values stored on stack
-        // _b is a shallow copy of a
-        println!("On Stack a={} b={}", a, _b);
+        // b is a shallow copy of a
+        println!("On Stack a={} b={}", a, b);
     }
 
     // On heap
@@ -29,6 +29,15 @@ fn main() {
         let s3 = s2.clone();
 
         println!("On Heap s2={} s3={}", s2, s3);
+
+        let p1 = Person {
+            id: 1,
+            name: String::from("John"),
+            age: 25,
+        };
+        let p2 = p1.clone();
+        println!("p1 = {:#?}", p1);
+        println!("p2 = {:#?}", p2);
     }
 
     println!("Function call with parameters");
@@ -58,4 +67,11 @@ fn stack_and_heap() -> i32 {
 // function with implicit return
 fn get_default() -> i32 {
     5
+}
+
+#[derive(Debug, Clone)]
+struct Person {
+    id: u8,
+    name: String,
+    age: u8,
 }
