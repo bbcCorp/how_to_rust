@@ -4,10 +4,14 @@ fn main() {
     println!("\n\nDemo of Collections in Rust");
 
     demo_vectors();
+    demo_vec_deque();
+    demo_linkedlist();
 
-    demo_maps();
+    demo_hash_map();
+    demo_btree_map();
 
-    demo_sets();
+    demo_hash_set();
+    demo_btree_set();
 }
 
 fn demo_vectors() {
@@ -24,6 +28,10 @@ fn demo_vectors() {
     let _ = v1.pop();
     println!("Vector:{:?}", v1);
 
+    // get an iterator
+    let v1_iter = v1.iter();
+    println!("Vector iterator: {:?}\n", v1_iter);
+
     let v2: Vec<i32> = Vec::from([1, 2, 3, 4, 5]);
     println!("Vector v2:{:?}", v2);
     println!("v2[0]={}", v2[0]);
@@ -37,18 +45,33 @@ fn demo_vectors() {
         Some(third) => println!("The third element is {third}"),
         None => println!("There is no third element."),
     }
+}
 
+fn demo_vec_deque() {
     // VecDeque : A double ended queue
+}
 
+fn demo_linkedlist() {
     // LinkedList : A doubly-linked list containing a series of nodes
     // each node points to the node before and after in the series
 }
 
-fn demo_maps() {
+fn demo_hash_map() {
     println!("\n\n === Demo of Maps === ");
 
     // HashMap : A key value store like a Python dict
     // Reference: https://doc.rust-lang.org/book/ch08-03-hash-maps.html?highlight=hashmap#creating-a-new-hash-map
+
+    let coffee_map: HashMap<&str, f64> = HashMap::from([("Drip", 2.99), ("Espresso", 4.50)]);
+    println!("Coffee hashmap:{:?}", coffee_map);
+
+    // get an iterator
+    let coffee_iter = coffee_map.iter();
+    println!("HashMap iterator: {:?}\n", coffee_iter);
+
+    // using map with iterator
+    let total: f64 = coffee_iter.map(|(_coffee, value)| value).sum();
+    println!("Total cost of all coffees:{}", total);
 
     let mut dict: HashMap<i32, &str> = HashMap::new();
     dict.insert(1, "Hello");
@@ -72,13 +95,17 @@ fn demo_maps() {
         Some(removed) => print!("Removed value:{} from dict", removed),
         None => println!("Key:8 does not exist"),
     }
+}
 
+fn demo_btree_map() {
     // BTreeMap: A map optimized for search
 }
 
-fn demo_sets() {
+fn demo_hash_set() {
 
     // HashSet : A set containing no duplicates implemented as a HashMap
+}
 
+fn demo_btree_set() {
     // BTreeMap: An ordered set implemented as a BTreeMap that is optimized for search
 }
