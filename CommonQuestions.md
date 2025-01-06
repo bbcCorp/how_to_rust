@@ -157,3 +157,19 @@ Scope is the range within a program for which an item is valid.
 
 ----
 
+5. **Difference between an array and Vec type** 
+
+Here are the key differences between arrays and vectors in Rust:
+    - Size: Arrays have a fixed size, while vectors have a dynamic size.
+    - Memory allocation: Arrays are stack-allocated, while vectors are heap-allocated.
+    - Resizing: Arrays cannot be resized dynamically, while vectors can be resized dynamically.
+    - Performance: Arrays are generally faster and more efficient than vectors, since they are stored on the stack and do not require dynamic memory allocation.
+
+Arrays are suitable for small, fixed-size collections, while vectors are suitable for large, dynamic collections.
+
+----
+
+
+
+
+

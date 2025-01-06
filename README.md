@@ -84,10 +84,11 @@ We have lots of things to cover so here is a step-wise exploration of the key to
 | 3 | [Structs and Traits](./code/structs_and_traits/src/main.rs) | Exploring Structs and Traits |
 | 4 | [Control flow](./code/control_flow/src/main.rs) | Exploring control flows|
 | 5 | [Functions and Closures](./code/demo_closures_and_functions/src/main.rs) | Exploring functions and closures|
-| 6 | [Custom libraries](./code/demo_package/src/main.rs) | How to create and use libraries|
-| 7 | [Strings](./code/demo_strings/src/main.rs) | Exploring Strings, Ownerships, References and multable references |
+| 6 | [Collections](./code/demo_collections/src/main.rs) | Exploring sequences, maps and sets |
+| 7 | [Custom libraries](./code/demo_package/src/main.rs) | How to create and use libraries|
+| 8 | [Strings](./code/demo_strings/src/main.rs) | Exploring Strings, Ownerships, References and multable references |
 | 8 | [Stack and Heap](./code/stack_and_heap/src/main.rs) | Exploring Stack and Heap |
-| 9 | [References and Slices](./code/references_and_slices/src/main.rs) | Exploring Rust References and slices |
+| 10 | [References and Slices](./code/references_and_slices/src/main.rs) | Exploring Rust References and slices |
 ------------
 
 You can find answers to common questions [here](./CommonQuestions.md)
@@ -96,6 +97,7 @@ You can find answers to common questions [here](./CommonQuestions.md)
 
 ## References
 * [Official | Getting started guide](https://www.rust-lang.org/learn/get-started) 
+* [The Rust Programming Language](https://doc.rust-lang.org/book/)
 * [Ultimate-Rust-Crash-Course by Nathan Stocks](https://www.udemy.com/course/ultimate-rust-crash-course/)
 * [Rust 2021 Fundamentals by Zachary Bennett | Pluralsight](https://www.pluralsight.com/courses/rust-2021-fundamentals)
 * [A Gentle Introduction To Rust | Bt Steve Donovan](https://stevedonovan.github.io/rust-gentle-intro/readme.html)
