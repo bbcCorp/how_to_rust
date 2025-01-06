@@ -1,5 +1,36 @@
 // main is the starting point of rust programs
 fn main() {
+    // On stack
+    {
+        let a = 1;
+        let _b = a;
+
+        // a and _b can both be used since these are simple values stored on stack
+        // _b is a shallow copy of a
+        println!("On Stack a={} b={}", a, _b);
+    }
+
+    // On heap
+    {
+        // s1 and _s2 are stack variables that point to a location on the heap
+        // it stores a pointer to the heap location and the size of the data
+
+        let s1 = String::from("hello");
+
+        let s2 = s1;
+
+        // The value of s1 has been MOVED to s2. Beyond this point we cannot use s1
+        // They both CANNOT be used at the same time
+        // println!("On Heap s1={} s2={}", s1, s2); will result in error
+
+        // If we want to use both the variables, we will need to clone the data
+        // Clone trait creates a deep copy of the data,
+        // so s2 and s3 refers to different memory locations with same data
+        let s3 = s2.clone();
+
+        println!("On Heap s2={} s3={}", s2, s3);
+    }
+
     println!("Function call with parameters");
     let a = 2;
     let result = stack_only(a);

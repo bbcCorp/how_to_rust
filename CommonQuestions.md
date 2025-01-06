@@ -148,3 +148,12 @@ if x.is_ok() {
 In summary, `Result` is a powerful type in Rust that helps you handle errors and exceptions in a explicit and safe way. By using `Result`, you can write more robust and reliable code that avoids panicking or crashing the program when an error occurs.
 
 ---
+4. **Explain the `Rule of Three` that defines owndership **
+
+Scope is the range within a program for which an item is valid.
+1. Every value is owned
+2. One owner at a time
+3. When the owner leaves scope, what is owned is dropped.
+
+----
+
