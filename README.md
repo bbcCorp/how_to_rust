@@ -116,7 +116,7 @@ Next we implemented some algorithms
 
 | Sequence | Topic  | Description |
 | ---------| -----  | ----------- |
-| 1 | [LinkedList using Vector](./code/algorithms/src/lib.rs) | LinkedList using Vec |
+| 1 | [LinkedList using Vector](./code/algorithms/src/linked_list/mod.rs) | Linked List implementation using Vec |
 
 ---
 

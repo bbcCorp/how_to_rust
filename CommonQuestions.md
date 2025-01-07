@@ -169,7 +169,7 @@ Arrays are suitable for small, fixed-size collections, while vectors are suitabl
 
 ----
 
-**When to Use Vec or LinkedList in Rust**
+6. **When to Use Vec or LinkedList in Rust**
 
 In Rust, `Vec` and `LinkedList` are two different data structures that can be used to store collections of values. While they share some similarities, they have distinct differences in terms of their characteristics, usage, and behavior.
 
@@ -217,6 +217,17 @@ Listen to [Bjarne Stroustrup on why you should avoid Linked Lists](https://www.y
 
 ---
 
+6. **Crates vs Packages**
 
+Crates are a grouping of module that produces either a library or an executable. There are two types of crates: 
+1. Library crate - A crate that contains code meant to be consumed by other Rust projects
+2. Binary crates - A crate that is compiled to an executable
 
+Packages are used by Cargo, the Rust package manager, to help handle and share crates. Packages are defined by a manifest file called `Cargo.toml`
+
+A crate is a single unit of compilation, while a package is a collection of one or more crates that are published together. A package can contain multiple crates, and each crate can have its own dependencies and versioning information.
+
+Packages can contain any number of binary crates but only 1 library crate.
+
+---
 
