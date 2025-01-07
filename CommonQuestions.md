@@ -231,3 +231,47 @@ Packages can contain any number of binary crates but only 1 library crate.
 
 ---
 
+7. **Explain `Result` type in Rust**
+
+In Rust, the Result type is a built-in type that represents a value that may or may not be present. It is a way to handle errors and exceptions in a more explicit and safe way.
+
+A Result is a type that can have one of two possible values:
+- Ok(value): This represents a successful computation that produced a value.
+- Err(error): This represents a failed computation that produced an error.
+
+Example: In this example, the divide function returns a Result that is either Ok with the result of the division, or Err with an error message if the divisor is zero.
+
+```rust
+fn divide(x: i32, y: i32) -> Result<i32, &'static str> {
+    if y == 0 {
+        Err("Cannot divide by zero!")
+    } else {
+        Ok(x / y)
+    }
+}
+
+fn main() {
+    match divide(10, 2) {
+        Ok(result) => println!("Result: {}", result),
+        Err(error) => panic!("Error: {}", error),
+    }
+}
+```
+
+In Rust, the ? operator is used to propagate errors up the call stack. It is a shorthand way to handle errors in a more concise way.
+
+Example: In this example, the calculate function calls the divide function and uses the ? operator to propagate any errors that may occur. If the divide function returns an error, the ? operator will return that error from the calculate function.
+
+```rust
+fn calculate(x: i32, y: i32) -> Result<i32, &'static str> {
+    let result = divide(x, y)?; // ? unwraps the value or propagates the error
+    Ok(result * 2)
+}
+```
+
+----
+8. ***Result vs Option***
+
+Result and Option are both used to handle cases where a value may or may not be present. However, they have different use cases:
+- Option: Use Option when the absence of a value is a valid and expected outcome.
+- Result: Use Result when the absence of a value is an error or an unexpected outcome.

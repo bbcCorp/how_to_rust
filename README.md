@@ -108,6 +108,7 @@ We have lots of things to cover so here is a step-wise exploration of the key to
 | 8 | [Stack and Heap](./code/stack_and_heap/src/main.rs) | Exploring Stack and Heap |
 | 10 | [References and Slices](./code/references_and_slices/src/main.rs) | Exploring Rust References and slices |
 | 11 | [Generics](./code/demo_generics/src/main.rs) | Exploring Generics in Rust |
+| 12 | [File I/O](./code/demo_fileio/src/main.rs) | Exploring File I/O in Rust |
 ------------
 
 You can find answers to common questions [here](./CommonQuestions.md)
