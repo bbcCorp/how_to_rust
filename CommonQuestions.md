@@ -169,6 +169,53 @@ Arrays are suitable for small, fixed-size collections, while vectors are suitabl
 
 ----
 
+**When to Use Vec or LinkedList in Rust**
+
+In Rust, `Vec` and `LinkedList` are two different data structures that can be used to store collections of values. While they share some similarities, they have distinct differences in terms of their characteristics, usage, and behavior.
+
+**Vec**
+
+`Vec` is a dynamic, growable array that is stored on the heap. It is a contiguous block of memory that can grow or shrink dynamically as elements are added or removed.
+
+**LinkedList**
+
+`LinkedList` is a doubly-linked list that is stored on the heap. It is a sequence of nodes that are linked together, where each node points to the next node in the sequence.
+
+**When to Use Vec**
+
+Here are some scenarios where you should use `Vec`:
+
+* **Random access**: When you need to access elements at arbitrary indices, `Vec` is a better choice because it provides constant-time access to elements.
+* **Cache-friendly**: When you need to iterate over a large collection of elements, `Vec` is a better choice because it is stored in contiguous memory, which makes it cache-friendly.
+* **Insertion and deletion at the end**: When you need to frequently insert or delete elements at the end of the collection, `Vec` is a better choice because it can grow or shrink dynamically.
+* **Memory efficiency**: When you need to store a large collection of elements and memory efficiency is a concern, `Vec` is a better choice because it uses less memory than `LinkedList`.
+
+**When to Use LinkedList**
+
+Here are some scenarios where you should use `LinkedList`:
+
+* **Frequent insertion and deletion at arbitrary positions**: When you need to frequently insert or delete elements at arbitrary positions in the collection, `LinkedList` is a better choice because it can do so in constant time.
+* **Preserving order**: When you need to preserve the order of elements in the collection, `LinkedList` is a better choice because it maintains the order of elements even after insertion or deletion.
+* **Iterating over a large collection**: When you need to iterate over a large collection of elements and you don't need random access, `LinkedList` is a better choice because it is more memory-efficient than `Vec`.
+
+**In General**
+
+In general, if you need to store a collection of elements and you don't need to frequently insert or delete elements at arbitrary positions, `Vec` is a better choice. However, if you need to frequently insert or delete elements at arbitrary positions, `LinkedList` is a better choice.
+
+Here's a rough guideline to help you decide between `Vec` and `LinkedList`:
+
+* Use `Vec` when:
+	+ You need to store a large collection of elements and you don't need to frequently insert or delete elements at arbitrary positions.
+	+ You need to access elements at arbitrary indices.
+	+ You need to iterate over a large collection of elements and you don't need to preserve the order of elements.
+* Use `LinkedList` when:
+	+ You need to frequently insert or delete elements at arbitrary positions in the collection.
+	+ You need to preserve the order of elements in the collection.
+	+ You need to iterate over a large collection of elements and you don't need random access.
+
+Listen to [Bjarne Stroustrup on why you should avoid Linked Lists](https://www.youtube.com/watch?v=YQs6IC-vgmo). Always prefer Vec over LinkedList for performace reason. Compactness and predictability trumps random access in the real world.
+
+---
 
 
 

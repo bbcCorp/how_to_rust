@@ -112,6 +112,12 @@ We have lots of things to cover so here is a step-wise exploration of the key to
 
 You can find answers to common questions [here](./CommonQuestions.md)
 
+Next we implemented some algorithms
+
+| Sequence | Topic  | Description |
+| ---------| -----  | ----------- |
+| 1 | [LinkedList using Vector](./code/algorithms/src/lib.rs) | LinkedList using Vec |
+
 ---
 
 ## References
