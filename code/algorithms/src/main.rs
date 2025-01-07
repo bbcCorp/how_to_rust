@@ -1,4 +1,4 @@
-use algorithms::LinkedListAsVec;
+use algorithms::linked_list::LinkedListAsVec;
 use std::collections::LinkedList;
 use std::time::Instant;
 
