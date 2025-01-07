@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::collections::LinkedList;
 
 fn main() {
     println!("\n\nDemo of Collections in Rust");
@@ -54,6 +55,50 @@ fn demo_vec_deque() {
 fn demo_linkedlist() {
     // LinkedList : A doubly-linked list containing a series of nodes
     // each node points to the node before and after in the series
+    // Reference: https://doc.rust-lang.org/std/collections/struct.LinkedList.html
+
+    println!("\n\n === Linked List ===\n");
+
+    let mut ll1 = LinkedList::from([1, 2, 3]);
+    println!("ll1: {:?}", ll1);
+
+    // Searching in the list
+    assert_eq!(ll1.contains(&1), true);
+    assert_eq!(ll1.contains(&10), false);
+
+    // iterating over a linked list
+    for element in ll1.iter_mut() {
+        *element += 10;
+    }
+    println!("ll1: {:?}", ll1);
+
+    // remove all elements from linked list
+    ll1.clear();
+
+    // assert list is empty
+    assert!(ll1.is_empty());
+
+    // Start with an empty list and insert elements from both ends
+    let mut llist = LinkedList::new();
+
+    // assert that the reference to front and back nodes are None
+    assert_eq!(llist.front(), None);
+    assert_eq!(llist.back(), None);
+
+    // Insert elements at both end
+    llist.push_back('b');
+    llist.push_front('a');
+    llist.push_back('c');
+    llist.push_back('d');
+
+    println!("llist after insertion: {:?}", llist);
+
+    // Now lets remove a few elements using pop_front() and pop_back() methods
+    assert_eq!(llist.pop_front(), Some('a'));
+    llist.pop_front();
+    llist.pop_back();
+
+    println!("llist after deletion: {:?}", llist);
 }
 
 fn demo_hash_map() {
