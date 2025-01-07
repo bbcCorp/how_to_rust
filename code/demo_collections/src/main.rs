@@ -1,3 +1,4 @@
+use std::collections::BTreeMap;
 use std::collections::HashMap;
 use std::collections::LinkedList;
 
@@ -102,7 +103,7 @@ fn demo_linkedlist() {
 }
 
 fn demo_hash_map() {
-    println!("\n\n === Demo of Maps === ");
+    println!("\n\n === Demo of HashMap === ");
 
     // HashMap : A key value store like a Python dict
     // Reference: https://doc.rust-lang.org/book/ch08-03-hash-maps.html?highlight=hashmap#creating-a-new-hash-map
@@ -121,6 +122,10 @@ fn demo_hash_map() {
     let mut dict: HashMap<i32, &str> = HashMap::new();
     dict.insert(1, "Hello");
     dict.insert(2, "World!");
+
+    // insert a key only if it doesn't already exist
+    dict.entry(3).or_insert("BBC");
+
     println!(
         "HashMap - Size of dict:{}, e1:{}, e2:{}",
         dict.len(),
@@ -144,6 +149,49 @@ fn demo_hash_map() {
 
 fn demo_btree_map() {
     // BTreeMap: A map optimized for search
+
+    println!("\n\n === Demo of BTreeMap === ");
+
+    // BTreeMap : An ordered map based on a B-Tree.
+    // Reference: https://doc.rust-lang.org/std/collections/struct.BTreeMap.html
+
+    let coffee_map: BTreeMap<&str, f64> = BTreeMap::from([("Drip", 2.99), ("Espresso", 4.50)]);
+    println!("Coffee map:{:?}", coffee_map);
+
+    // get an iterator
+    let coffee_iter = coffee_map.iter();
+    println!("BTreeMap iterator: {:?}\n", coffee_iter);
+
+    // using iterator adapters - some consume some don't
+    let total: f64 = coffee_iter.map(|(_coffee, value)| value).sum();
+    println!("Total cost of all coffees:{}", total);
+
+    let mut btree_map: BTreeMap<i32, &str> = BTreeMap::new();
+    btree_map.insert(1, "Hello");
+    btree_map.insert(2, "World!");
+
+    // insert a key only if it doesn't already exist
+    btree_map.entry(3).or_insert("BBC");
+
+    println!(
+        "BTreeMap - Size of btree_map:{}, e1:{}, e2:{}",
+        btree_map.len(),
+        btree_map[&1],
+        btree_map[&2]
+    );
+
+    // Iterating over a hashmap
+    println!("\n Printing all elements in the hashmap");
+    for (key, value) in &btree_map {
+        println!("key:{} value:{}", key, value);
+    }
+
+    // Now let's try removal of element
+    let maybe_remove: Option<&str> = btree_map.remove(&8);
+    match maybe_remove {
+        Some(removed) => print!("Removed value:{} from btree_map", removed),
+        None => println!("Key:8 does not exist"),
+    }
 }
 
 fn demo_hash_set() {
