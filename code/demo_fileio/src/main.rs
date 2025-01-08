@@ -1,4 +1,5 @@
 // demo of file IO
+use std::fs;
 use std::fs::File;
 use std::io::BufReader;
 use std::io::Error;
@@ -26,7 +27,16 @@ fn main() {
     }
 
     // Demo: How to write to a file
-    let write_to_filename = Path::new("rust-test-fileio.txt");
+    let folder_path = r"/Users/bbc/tmp/";
+
+    // ensure the path exist
+    match fs::exists(folder_path) {
+        Ok(_) => println!("Path already exist"),
+        Err(_err) => fs::create_dir_all(folder_path).unwrap(),
+    }
+
+    let write_to_filename = Path::new(folder_path).join("rust-test-fileio.txt");
+
     let data = String::from("A journey of a thousand miles begins with a single step");
     let try_write = write_to_file(&write_to_filename, &data);
 
@@ -34,6 +44,9 @@ fn main() {
         Ok(_) => println!("Data written to file successfully"),
         Err(err) => print!("Error writing file content: {:?}\n\n", err),
     }
+
+    // Now cleanup
+    fs::remove_file(write_to_filename).unwrap();
 }
 
 fn read_file(file_path: &Path) -> Result<String, Error> {
