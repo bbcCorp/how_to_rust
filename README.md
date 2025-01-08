@@ -109,6 +109,7 @@ We have lots of things to cover so here is a step-wise exploration of the key to
 | 10 | [References and Slices](./code/references_and_slices/src/main.rs) | Exploring Rust References and slices |
 | 11 | [Generics](./code/demo_generics/src/main.rs) | Exploring Generics in Rust |
 | 12 | [File I/O](./code/demo_fileio/src/main.rs) | Exploring File I/O in Rust |
+| 13 | [Threads](./code/demo_thread/src/main.rs) | Exploring Threads in Rust |
 ------------
 
 You can find answers to common questions [here](./CommonQuestions.md)
