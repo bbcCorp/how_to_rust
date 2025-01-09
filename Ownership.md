@@ -49,6 +49,29 @@ fn main() {
 
 RAII (Resource Acquisition Is Initialization) is a pattern in Rust that's used to manage resources. The basic idea is that a resource is tied to a variable, so that when the variable goes out of scope, the resource is freed. For example, when a String goes out of scope, its destructor is called and its memory is freed. This is similar to how smart pointers work in C++.
 
+```rust
+fn print_str(a: String){
+    println!("String: {}",a);
+}
+
+fn main(){
+    let x: String = String::from("Test");
+
+    print_str(x);   // this will transfer the ownership of x to the function's a
+    // once the function get executed and a goes out of scope, the value represented by x
+    // will be dropped
+
+    // Hence another call like this will result in error
+    print_str(x);
+}
+```
+
+The last line will result in an error: `use of moved value: x` which illustrates how borrow checker keeps track of ownership and lifetime of non-primitive data.
+
+For primitive types like int/chat/float/array/tuple we will not see this behaviour. FOr these types since size is know at compile time, theit values are stored on the stack. They all implement the `Copy triat`, so everytime there is an assignment like `y=x` there is an implicit copy. 
+
+Rust does not do that for non-primitive types like String, which are stored on a heap.
+
 ## References
 
 What if we want to have two pointers to the same variable? This is called aliasing, and it can cause problems if we try to modify the variable through both pointers. Rust prevents this by default, but we can use references to allow aliasing.

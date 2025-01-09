@@ -275,3 +275,11 @@ fn calculate(x: i32, y: i32) -> Result<i32, &'static str> {
 Result and Option are both used to handle cases where a value may or may not be present. However, they have different use cases:
 - Option: Use Option when the absence of a value is a valid and expected outcome.
 - Result: Use Result when the absence of a value is an error or an unexpected outcome.
+
+---
+8. ***How to write to a HashMap only if key doesn't exist***
+
+```rust
+// insert a key only if it doesn't already exist
+player_stats.entry("my_key").or_insert(100);
+```
