@@ -18,6 +18,12 @@ fn main() {
     // b is a copy of a. Both a and b are on the stack and are independent of each other.
     // Hence, we can use both a and b in the program.
 
+    // Now let's try the same with arrays
+    let a1: [i32; 5] = [1, 2, 3, 4, 5];
+    let a2 = a1;
+    println!("{:?}", a1);
+    println!("{:?}", a2);
+
     let s1 = String::from("hello");
     let s2 = s1;
     // s2 is a copy of s1. But s1 is not valid anymore.

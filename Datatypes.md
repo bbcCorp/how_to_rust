@@ -70,3 +70,6 @@ let a: [i32,5] = [1,2,3,4,5];
 
 Note:
 1. For 'primitive' types like numbers, since they are just values; they are allowed to be copyable because they are cheap to copy.
+2. The `Copy` trait is already implemented for them.
+3. Copying is implicit for primitive types
+4. Same rule also applies for structs comprised only of primitive types.

@@ -86,10 +86,12 @@ We have lots of things to cover so here is a step-wise exploration of the key to
 ---
 
 ### Topics:
+
 - [Datatypes](./Datatypes.md)
 - [Macros](./Macro.md)
 - [Memory](./Memory.md)
 - [Ownership](./Ownership.md)
+- [Lifetime](./Lifetime.md)
 
 ---
 
