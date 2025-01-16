@@ -1,9 +1,9 @@
-use std::sync::mpsc::channel;
 //use std::sync::mpsc::{Receiver, Sender};
+use std::sync::mpsc::channel;
 use std::sync::{Arc, Mutex};
 use std::thread;
 use std::thread::{JoinHandle, Thread};
-use std::time::Duration;
+use std::time::Duration; // mpsc = multiple producer, single consumer
 
 fn main() {
     println!("=== Demo of threads in Rust ===");
@@ -20,11 +20,18 @@ fn main() {
 fn demo_simple_thread() {
     println!("\n\n===Simple thread===");
 
-    // Spawning threads
-    // spawn func needs a closure which kicks off when the threads kicks off. It returns a JoinHandle
-    let t1: JoinHandle<()> = thread::spawn(|| println!("Logging from thread 1"));
+    let msg: String = String::from("Demo of a simple thread and closure encapsulating a reference");
 
-    t1.join().unwrap();
+    // Spawning threads. It returns a JoinHandle
+    // spawn func needs a closure which kicks off when the threads kicks off.
+    // Note: Closure can encapsulate the variables defined in the scope of the function
+    // If we need to use the variable, we will have to "move" the ownership of the variable
+    thread::spawn(move || {
+        println!("Logging from thread 1");
+        println!("{}", msg);
+    })
+    .join()
+    .unwrap();
 }
 
 fn demo_nested_threads() {
@@ -50,6 +57,8 @@ fn demo_nested_threads() {
 fn demo_thread_communication() {
     println!("\n\n===Communication between threads===");
 
+    // channels eliminates possibility of race conditions
+    // In Rust, channels are type safe and memory safe
     let (transmitter, receiver) = channel();
 
     let sender_thread: JoinHandle<()> = thread::spawn(move || {
@@ -80,6 +89,8 @@ fn demo_thread_communication() {
 
     sender_thread.join().unwrap();
     receiver_thread.join().unwrap();
+
+    // channel is closed when all of the sender and receiver are no longer available
 }
 
 fn demo_threads_with_mutex() {

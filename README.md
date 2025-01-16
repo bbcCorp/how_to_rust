@@ -43,6 +43,29 @@ cargo 1.83.0
 
 Rust has a six-week, rapid release process. To update the rust installation, use the `rustup update` utility.
 
+
+### IDE Setup
+
+If you are comfortable wih a vim like experience consider [Helix Editor](https://helix-editor.com)
+
+```bash
+# On a Mac
+$ brew install helix rust-analyzer llvm marksman
+
+# On Ubuntu 
+## Add ppa
+$ sudo add-apt-repository ppa:maveonair/helix-editor
+$ sudo apt update
+
+$ sudo apt install helix xclip rust-analyzer llvm
+```
+
+### VSCode
+You can follow [this guide](https://code.visualstudio.com/docs/languages/rust)
+
+---
+
+
 ### Hello World
 
 Create a new file named main.rs and use your editor to write the following code into it:
@@ -87,11 +110,11 @@ We have lots of things to cover so here is a step-wise exploration of the key to
 
 ### Topics:
 
-- [Datatypes](./Datatypes.md)
-- [Macros](./Macro.md)
-- [Memory](./Memory.md)
-- [Ownership](./Ownership.md)
-- [Lifetime](./Lifetime.md)
+- [Datatypes](./notes/Datatypes.md)
+- [Macros](./notes/Macro.md)
+- [Memory](./notes/Memory.md)
+- [Ownership](./notes/Ownership.md)
+- [Lifetime](./notes/Lifetime.md)
 
 ---
 
@@ -130,5 +153,6 @@ Next we implemented some algorithms
 * [Ultimate-Rust-Crash-Course by Nathan Stocks](https://www.udemy.com/course/ultimate-rust-crash-course/)
 * [Rust 2021 Fundamentals by Zachary Bennett | Pluralsight](https://www.pluralsight.com/courses/rust-2021-fundamentals)
 * [A Gentle Introduction To Rust | Bt Steve Donovan](https://stevedonovan.github.io/rust-gentle-intro/readme.html)
+* [Implementing Concurrency in Rust | By Shaun Meyer](https://app.pluralsight.com/library/courses/rust-implementing-concurrency/)
 
 ---
