@@ -11,7 +11,7 @@ fn main() {
     let common_words: Vec<String> = vec![String::from("Gutenberg"), String::from("travel")];
 
     let wc_result = find_word_occurances(&common_words).unwrap();
-    println!("Word count: {:?}", wc_result);
+    println!("Total Word count: {:?}", wc_result);
 }
 
 fn find_word_occurances(
@@ -20,7 +20,7 @@ fn find_word_occurances(
     let mut wordcount_map: HashMap<String, i32> = HashMap::new();
 
     // Demo - Buffered reading
-    let file_path = Path::new("gullivers_travels.txt");
+    let file_path = Path::new("./gullivers_travels.txt");
     let fp = File::open(file_path)?;
     let reader = BufReader::new(fp);
 
@@ -32,7 +32,12 @@ fn find_word_occurances(
     for (_i, line) in reader.lines().enumerate() {
         if line_count >= buffer_limit {
             // process the buffer contents
-            wordcount_map = find_word_count_in_buffer(&lines_buffer, &common_words)?;
+            let result = find_word_count_in_buffer(&lines_buffer, &common_words)?;
+
+            // update the wordcount_map with the values from result
+            for (word_key, word_count) in result.iter() {
+                *wordcount_map.entry(word_key.clone()).or_insert(0) += word_count;
+            }
 
             line_count = 0;
             lines_buffer.clear();
@@ -44,7 +49,12 @@ fn find_word_occurances(
 
     if !lines_buffer.is_empty() {
         // process the last buffer
-        wordcount_map = find_word_count_in_buffer(&lines_buffer, &common_words).unwrap();
+        let result = find_word_count_in_buffer(&lines_buffer, &common_words).unwrap();
+
+        // update the wordcount_map with the values from result
+        for (word_key, word_count) in result.iter() {
+            *wordcount_map.entry(word_key.clone()).or_insert(0) += word_count;
+        }
     }
 
     Ok(wordcount_map)
