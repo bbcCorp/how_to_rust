@@ -277,12 +277,133 @@ Result and Option are both used to handle cases where a value may or may not be 
 - Result: Use Result when the absence of a value is an error or an unexpected outcome.
 
 ---
-8. ***How to write to a HashMap only if key doesn't exist***
+9. ***How to write to a HashMap only if key doesn't exist***
 
 ```rust
 // insert a key only if it doesn't already exist
 player_stats.entry("my_key").or_insert(100);
 ```
+
+---
+
+10. ***Explain: "Do not communicate by sharing memory but share memory by communicating" ***
+
+In many programming languages, threads often communicate with each other by sharing mutable state, such as variables or data structures, through shared memory. This can lead to synchronization issues, data races, and other concurrency-related problems.
+
+Rust takes a different approach. Instead of sharing memory directly, Rust encourages you to use channels, message passing, and other forms of communication to exchange data between threads. This approach is often referred to as "shared memory by communicating" or "message passing."
+
+In Rust, you can use libraries like std::sync::mpsc (multi-producer, single-consumer) or crossbeam to create channels that allow threads to communicate with each other. By using these channels, you can share data between threads without exposing shared mutable state. This is especially useful when data is created in one thread and consumed in another.
+
+By using channels and message passing, Rust encourages us to write concurrent code that is safer, more efficient, and easier to reason about.
+
+Example:
+```rust
+use std::sync::mpsc;
+
+fn main() {
+    let (tx, rx) = mpsc::channel();
+
+    std::thread::spawn(move || {
+        let message = "Hello, world!";
+        tx.send(message).unwrap();
+    });
+
+    let received_message = rx.recv().unwrap();
+    println!("{}", received_message);
+}
+```
+
+---
+
+11. *** Mutexes in Rust ***
+
+Rust provides mutexes which can be used by multiple threads to access/modify shared data. 
+
+The mutex can be created via a new constructor. Each mutex has a type parameter which represents the data that it is protecting. The data can only be accessed through the RAII guards returned from lock and try_lock, which guarantees that the data is only ever accessed when the mutex is locked.
+
+Mutexes protect shared data from concurrent access and helps prevent data races. Mutex will block threads waiting for the lock to become available. 
+
+To use a mutex, we must 
+- Acquire a lock before using the data
+- Release the lock when finished. 
+
+Locks are automatically released when a MutexGuard does out of scope. To unlock a mutex guard sooner than the end of the enclosing scope, either create an inner scope or drop the guard manually.
+
+Example:
+```rust
+fn simple_mutex_demo(){
+    let simple_mutex = Mutex::new(10);
+
+    // Display the mutex
+    println!("{:?}", simple_mutex);
+
+    // Display the data inside the mutex
+    let num1 = simple_mutex.lock().unwrap();
+    println!("Data inside mutex: {:?}", num1);
+
+    // We drop the mutex guard to if release the lock explicitly 
+    // Without this the program will get stuck next time we try to acquire a lock
+    drop(num1);
+
+    // we will create a new scope to represent a thread context
+    {
+        // acquire the lock 
+        let mut num = simple_mutex.lock().unwrap(); 
+
+        // modify the data 
+        *num = 20;
+
+    } // lock is automatically released here
+
+    // Display the mutex
+    println!("{:?}", simple_mutex);
+
+    let num2 = simple_mutex.lock().unwrap();
+    println!("Data inside mutex: {:?}", num2);
+    drop(num2);
+}
+```
+
+Management of mutexes can be tricky, and can result in deadlocks, so it is better to use channels wherever possible.
+
+---
+
+12. *** What is the role of Atomic Reference Count (ARC) while using Mutex ***
+
+In Rust, Arc stands for "Atomically Reference Counted". It's a type of smart pointer that allows multiple owners to share the same value, while ensuring that the value is properly cleaned up when it's no longer needed.
+
+```rust
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn main() {
+    let counter = Arc::new(Mutex::new(0));
+    let mut handles = vec![];
+
+    for _ in 0..10 {
+        let counter_clone = Arc::clone(&counter);
+        let handle = thread::spawn(move || {
+            let mut num = counter_clone.lock().unwrap();    // acquire the lock here
+            *num += 1;
+        }   // lock is automatically released here
+        );
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    println!("Final count: {}", *counter.lock().unwrap());
+}
+```
+
+This Arc struct, via the Clone implementation can create a reference pointer for the location of a value in the memory heap while increasing the reference counter. As it shares ownership between threads, when the last reference pointer to a value is out of scope, the variable is dropped.
+
+Wrapping a Mutex with an Arc is a common pattern in Rust that is used to can share a Mutex instance with multiple threads or parts of our program. Mutex allows safe mutability where as Arc allows us to safely share a value between multiple threads.
+
+Read more [about why we wrap Mutex using Arc in this article](https://itsallaboutthebit.com/arc-mutex/)
+---
 
 ---
 

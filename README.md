@@ -135,6 +135,7 @@ We have lots of things to cover so here is a step-wise exploration of the key to
 | 11 | [Generics](./code/demo_generics/src/main.rs) | Exploring Generics in Rust |
 | 12 | [File I/O](./code/demo_fileio/src/main.rs) | Exploring File I/O in Rust |
 | 13 | [Threads](./code/demo_thread/src/main.rs) | Exploring Threads in Rust |
+| 13 | [Mutexes and Arc](./code/demo_mutex/src/main.rs) | Exploring Mutexes in Rust |
 ------------
 
 You can find answers to common questions [here](./CommonQuestions.md)
@@ -150,6 +151,7 @@ Next we implemented some algorithms
 ## References
 * [Official | Getting started guide](https://www.rust-lang.org/learn/get-started) 
 * [The Rust Programming Language](https://doc.rust-lang.org/book/)
+* [Rust By Example](https://doc.rust-lang.org/rust-by-example/index.html)
 * [Ultimate-Rust-Crash-Course by Nathan Stocks](https://www.udemy.com/course/ultimate-rust-crash-course/)
 * [Rust 2021 Fundamentals by Zachary Bennett | Pluralsight](https://www.pluralsight.com/courses/rust-2021-fundamentals)
 * [A Gentle Introduction To Rust | Bt Steve Donovan](https://stevedonovan.github.io/rust-gentle-intro/readme.html)
