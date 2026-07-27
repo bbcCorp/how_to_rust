@@ -70,8 +70,15 @@ codegen-units = 1    # single codegen unit = better optimization, slower compile
 
 ### Comparison of LTO Settings
 
-Link-time optimization (LTO) is a whole-program optimization technique that can
-improve runtime speed by 10-20% or more, and also reduce binary size, at the cost of worse compile times. 
+Link-Time Optimization (LTO) is a powerful compiler technique in Rust that allows LLVM to optimize code
+across different compilation units (crates and modules) during the linking stage.
+
+By default, Cargo compiles and optimizes each crate individually in isolation, which blocks optimizations
+like inlining functions across separate crates. Enabling LTO removes these boundaries,
+allowing for dead code elimination, better inlining, and aggressive cross-crate optimizations.
+
+Link-time optimization (LTO) can improve runtime speed by 10-20% or more, and also reduce binary size,
+at the cost of worse compile times. 
 
 | LTO Value | Runtime Speed | Binary Size | Compile Time | Parallelization  |
 | --- | --- | --- | --- | --- |
