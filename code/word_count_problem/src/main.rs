@@ -10,7 +10,7 @@ fn main() {
 
     let common_words: Vec<String> = vec![String::from("Gutenberg"), String::from("travel")];
 
-    let wc_result = find_word_occurances(&common_words).unwrap();
+    let wc_result: HashMap<String, i32> = find_word_occurances(&common_words).unwrap();
     println!("Total Word count: {:?}", wc_result);
 }
 
@@ -25,14 +25,17 @@ fn find_word_occurances(
     let reader = BufReader::new(fp);
 
     // we will read 1000 lines from a file and process them
-    let buffer_limit = 1000; // number of lines to read
-    let mut line_count = 0;
+    let buffer_limit: i32 = 1000; // number of lines to read
+    let mut line_count: i32 = 0;
 
-    let mut lines_buffer = Vec::new();
+    let mut lines_buffer: Vec<String> = Vec::new();
+
     for (_i, line) in reader.lines().enumerate() {
+        // check if we have reached the buffer limit
         if line_count >= buffer_limit {
             // process the buffer contents
-            let result = find_word_count_in_buffer(&lines_buffer, &common_words)?;
+            let result: HashMap<String, i32> =
+                find_word_count_in_buffer(&lines_buffer, &common_words)?;
 
             // update the wordcount_map with the values from result
             for (word_key, word_count) in result.iter() {
@@ -71,11 +74,17 @@ fn find_word_count_in_buffer(
     }
 
     for line in lines_buffer {
+        let cleaned_line: String = line
+            .to_lowercase()
+            .chars()
+            .filter(|c| *c != ',' && *c != '!' && *c != '.')
+            .collect();
+
         // parse line and get words
-        let words_in_line: Vec<&str> = line.split_whitespace().collect();
+        let words_in_line: Vec<&str> = cleaned_line.split_whitespace().collect();
 
         for word in words_in_line {
-            let word_check = word.to_lowercase().trim().to_string();
+            let word_check: String = word.trim().to_string();
 
             if wordcount_map.contains_key(&word_check) {
                 *wordcount_map.entry(word_check.clone()).or_insert(0) += 1;
