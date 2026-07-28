@@ -137,12 +137,79 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 }
 ```
 
-
-To use lifetime annotations in function signatures, we need to declare the generic lifetime parameters inside angle brackets between the function name and the parameter list, just as we did with generic type parameters.
-
 ---
 
-## Lifetime Elation Rules
+## Non-Lexical Lifetimes (NLL) and the Borrow Checker
+
+The borrow checker enforces ownership and borrowing rules at compile time. It tracks the "borrow lifetime" — how long a reference is live — and rejects code where a borrowed reference could outlive the data it points to.
+
+Before NLL (pre-2018), the borrow checker used lexical scopes: a borrow was alive from declaration to the end of the block. With NLL, the borrow checker tracks the actual last USE of a reference, not its lexical scope.
+
+### Example: Borrow checker catches mutable borrow while immutable borrow is live
+
+```rust
+fn main() {
+    let mut words = String::from("hello world rust");
+    let first = first_word(&words);
+    words.clear();  // ERROR: mutable borrow while immutable borrow is live
+    println!("{}", first);
+}
+
+fn first_word(s: &String) -> &str {
+    let bytes = s.as_bytes();
+    for (i, &byte) in bytes.iter().enumerate() {
+        if byte == b' ' {
+            return &s[..i];
+        }
+    }
+    &s[..]
+}
+```
+
+Why this fails:
+- `first_word` returns `&str` — a string slice that borrows from the `String` owned by `words`.
+- `first` is an immutable borrow of `words` that is still alive when `words.clear()` is called.
+- `clear()` takes `&mut self` — it needs a mutable borrow.
+- You cannot have a mutable borrow while an immutable borrow exists. That's the violation.
+
+### Fix 1: Use the borrow before the mutable access
+
+```rust
+fn main() {
+    let mut words = String::from("hello world rust");
+    let first = first_word(&words);
+    println!("{}", first);  // last use of first — borrow ends here
+    words.clear();          // now fine — no live borrows
+    println!("{}", words);
+}
+```
+
+With NLL, the borrow of `words` by `first` ends at the `println!` line because that's the last place `first` is used. By the time `clear()` runs, there are no live borrows.
+
+### Fix 2: Return an owned String instead of a borrow
+
+```rust
+fn first_word(s: &String) -> String {
+    let bytes = s.as_bytes();
+    for (i, &byte) in bytes.iter().enumerate() {
+        if byte == b' ' {
+            return s[..i].to_string();
+        }
+    }
+    s[..].to_string()
+}
+```
+
+This compiles because there is no borrow — `first` owns a new heap allocation. But the trade-off is a memory allocation and copy of the substring.
+
+### The fundamental trade-off
+
+The borrow checker forces you to choose:
+- Borrow (`&str`, `&[T]`): zero-cost — just a pointer + length into existing data — but ties the return value's lifetime to the input.
+- Own (`String`, `Vec<T>`): free of lifetime constraints, but pays with memory and heap allocation.
+
+
+## Lifetime Elision Rules
 
 1. The compiler assigns a lifetime parameter to each parameter that is a reference.
 
@@ -151,5 +218,81 @@ To use lifetime annotations in function signatures, we need to declare the gener
 3. If there are multiple input lifetime parameters, but one of them is &self or &mut self, the lifetime of self is assigned to all output lifetime parameters.
 
 ---
+
+### Example: Multiple input references — which one does the output borrow from?
+
+Consider a function that searches for a word inside a string and returns the matching substring:
+
+```rust
+fn first_word_occurance(s: &str, word: &str) -> Option<&str> {
+    // ...
+}
+```
+
+This will not compile. The compiler gives:
+
+```bash
+error[E0106]: missing lifetime specifier
+```
+
+Why: there are TWO input references and ONE output reference. The borrow checker needs to know — does the output `&str` borrow from `s` or from `word`? It cannot guess.
+
+The lifetime elision rules only auto-resolve when:
+- There is exactly one input lifetime (rule 2), or
+- One parameter is `&self`/`&mut self` (rule 3)
+
+Neither applies here. So we must annotate explicitly.
+
+### The correct annotation — only tie the lifetime to what the output actually borrows
+
+The result is a substring of `s` — it points into `s`'s buffer, NOT into `word`. So only `s` gets the lifetime tied to the output:
+
+```rust
+fn first_word_occurance<'a>(s: &'a str, word: &str) -> Option<&'a str> {
+    s.find(word).map(|start| &s[start..start + word.len()])
+}
+```
+
+This is the pattern the standard library uses — `str::find` returns `Option<usize>`, and slicing with that result gives you an `Option<&str>`.
+
+`word` gets its own anonymous lifetime — it only needs to live for the duration of the function call. The return value does not borrow from `word`, so `word`'s lifetime is irrelevant to the caller.
+
+Key insight: not every input reference needs the same lifetime as the output. Annotate only the ones the output actually borrows from.
+
+This has the same borrow checker constraint as `first_word` — the returned `&str` borrows from `s`, so you cannot mutate `s` while the returned slice is still live. The `Option` wrapper does not change the borrow — `Some(&str)` still holds the immutable borrow of `s` until it is dropped or consumed.
+
+The Option<&'a str> holds an immutable borrow of s for as long as the Option is alive. Even though it's wrapped in Option, the borrow checker still tracks the inner &str — Some(&str) is still a live immutable borrow of s.
+
+So this fails:
+
+```rust
+    fn main() {
+        let mut s = String::from("hello world");
+        let found = first_word_occurance(&s, "world");  // borrows s immutably
+        s.clear();  // ERROR: cannot mutably borrow s while found is alive
+        if let Some(matched) = found {
+            println!("{}", matched);
+        }
+    }
+```
+
+And this works (same NLL principle as before — consume the borrow before mutating):
+
+```rust
+    fn main() {
+        let mut s = String::from("hello world");
+        let found = first_word_occurance(&s, "world");
+        if let Some(matched) = found {
+            println!("{}", matched);  // last use of found — borrow ends here
+        }
+        s.clear();  // fine — no live borrows
+    }
+```
+
+The Option doesn't change anything about the borrow. It just adds the possibility that the result is None. The lifetime 'a still ties the inner &str to s.
+
+---
+
+
 ## References
 - [The Rust Book | Validating References with Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)

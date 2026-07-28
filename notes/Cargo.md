@@ -66,4 +66,69 @@ edition = "2024"
 
 ---
 
- 
+## Using a Faster Linker: lld (LLVM linker)
+
+By default, Rust uses the system linker (`ld` on Linux, `ld64` on macOS, `link.exe` on Windows). For large projects the linker can dominate build time. Switching to `lld` — LLVM's linker — can significantly reduce link time.
+
+### Why lld is faster
+
+- `lld` is multi-threaded; the default `ld` (GNU ld / ld64) is largely single-threaded.
+- `lld` is purpose-built for LLVM-compiled code, which is exactly what rustc produces.
+- In debug builds especially, where code generation is fast but linking is still a single serial step, switching the linker often yields the biggest single speedup.
+
+### How to configure it
+
+There are two approaches:
+
+#### Approach 1: Set the linker in .cargo/config.toml
+
+Create `.cargo/config.toml` in your project (or `~/.cargo/config.toml` globally):
+
+```toml
+[target.x86_64-unknown-linux-gnu]
+linker = "clang"
+rustflags = ["-C", "link-arg=-fuse-ld=lld"]
+```
+
+This tells rustc to use `clang` as the linker driver and pass `-fuse-ld=lld` so clang invokes `lld` under the hood. (Using clang as the driver is the simplest way to select lld on Linux.)
+
+On macOS, `lld` is not the default — Apple's `ld64` is used. You generally keep `ld64` or use the `ld64.lld` variant:
+
+```toml
+[target.aarch64-apple-darwin]
+rustflags = ["-C", "linker-flavor=ld.lld", "-C", "linker=ld64.lld"]
+
+```
+
+Note: macOS lld support is still maturing — test before committing to it.
+
+#### Approach 2: Use the rust-lld wrapper via RUSTFLAGS
+
+```toml
+# .cargo/config.toml
+[target.x86_64-unknown-linux-gnu]
+linker = "rust-lld"
+```
+
+`rust-lld` is a wrapper shipped with rustup's LLVM toolchain. It selects the correct lld flavor for the target automatically. This is the simplest approach on Linux if your rustup component includes it (it usually does).
+
+### Verifying it works
+
+```bash
+# Build and check which linker was used
+cargo build --timings
+# or inspect the build output
+cargo build -v 2>&1 | grep linker
+```
+
+If you see `-fuse-ld=lld` or `rust-lld` in the rustc invocation, it's working.
+
+### Trade-offs
+
+- `lld` produces functionally identical binaries — it is not a downgrade in binary quality.
+- On Linux, you need `lld` installed (e.g., `apt install lld` or `dnf install lld`). The `rust-lld` wrapper from rustup bundles it, so that's the easier path.
+- On macOS, `ld64` is already fast and well-integrated; `lld` support is less battle-tested. Measure before switching.
+- On Windows, `lld-link` is available and is the default when using the `x86_64-pc-windows-msvc` target with recent toolchains.
+
+---
+

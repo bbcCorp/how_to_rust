@@ -131,7 +131,56 @@ fn main(){
 }
 ```
 
----------------
+## Borrowing Choice Encodes Intent
+
+The way you pass data to a function signals what the function intends to do with it. This is not just convention — the borrow checker enforces it:
+
+```rust
+// Pass by value — function gets its own copy, original is untouched.
+// Mutations inside the function are lost. Use when the function needs
+// its own independent copy (and the type is cheap to copy, or ownership
+// transfer is intentional).
+fn double_all(a: [i32; 5]) -> [i32; 5] {
+    let mut result = a;
+    for i in 0..result.len() {
+        result[i] *= 2;
+    }
+    result
+}
+
+// Pass &mut [T] — function mutates in place, caller sees the changes.
+// No copy. The caller must give up access for the duration of the borrow.
+fn double_in_place(a: &mut [i32]) {
+    for i in 0..a.len() {
+        a[i] *= 2;
+    }
+}
+
+// Pass &[T] — function can only read, no mutations possible.
+// No copy. Multiple callers can borrow simultaneously.
+fn calculate_sum(a: &[i32]) -> i32 {
+    a.iter().sum()
+}
+```
+
+Summary of the three options:
+
+| Signature    | Intent              | Copy? | Caller sees mutations? |
+|--------------|---------------------|-------|------------------------|
+| `T` (value)  | Need own copy       | Yes   | No                     |
+| `&mut T`     | Need to modify      | No    | Yes                    |
+| `&T`         | Need to read only   | No    | N/A (read-only)        |
+
+This applies uniformly to strings and arrays/Vec via their slice types:
+- `&str` = read-only borrow of a String (or any string data)
+- `&mut str` = mutable borrow (rare — constrained by UTF-8 boundaries)
+- `String` = owned, growable heap string
+
+- `&[T]` = read-only borrow of an array or Vec
+- `&mut [T]` = mutable borrow, modify in place
+- `Vec<T>` = owned, growable heap collection
+
+---
 
 ## References
 
